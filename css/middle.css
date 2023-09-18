@@ -1,0 +1,42 @@
+section#middle {
+  
+}
+section#middle div.wrap {
+  
+}
+section#middle div.wrap article {
+  
+}
+section#middle div.wrap article h2 {
+  
+}
+section#middle div.wrap article p {
+  
+}
+section#middle div.wrap article ul.list {
+  
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 30px;
+  margin-top: 50px;
+  width: 100%;
+  justify-content: space-around;
+}
+section#middle div.wrap article ul.list li {
+  
+  width: 550px;
+  box-sizing: border-box;
+  line-height: 2;
+}
+section#middle div.wrap article ul.list li h3 {
+  
+  background-color: lightgray;
+  padding-left: 15px;
+  transition: all 0.5s;
+}
+section#middle div.wrap article ul.list li p {
+  border: 1px solid;
+  border-top: none;
+  display: none;
+  padding-left: 15px;
+}

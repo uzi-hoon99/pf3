@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery & javascript</title>
+    <link rel="stylesheet" href=" https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.css ">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/middle.css">
+    <!-- <script src="https://code.jquery.com/jquery-3.7.0.min.js" type="text/javascript"></script> -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            // 첫번째 li에게만 클래스 지정
+            $(".gnb li:nth-child(1)").addClass("current");
+
+            // li를 클릭하면 실행
+            $(".gnb li").click(function(){
+                //클릭한 대상에 클래스 current를 지정
+                $(this).addClass("current"); //this = 클릭한 대상
+                //클릭한 대상을 제외한 나머지 형제요소의 클래스 삭제
+                $(this).siblings().removeClass("current");//siblings = 앞 요소를 제외한 나머지 형제 요소들
+            });
+
+            $("aside button").click(function(){
+                $("aside").toggleClass("asideshow");
+                $(this).toggleClass("buttonreverse");
+            });
+
+            //enb의 첫번째 li를 클릭하면 실행(클릭한 대상에게 클래스 ju)
+            $("header div.wrap ul.enb li:nth-child(1)").click(function(){
+                $("body main").addClass("ju");
+                $("body main").removeClass("ya");
+                return false;
+            });
+
+            //enb의 두번째 li를 클릭하면 실행(클릭한 대상에게 클래스 ya)
+            $("header div.wrap ul.enb li:nth-child(2)").click(function(){
+                $("body main").addClass("ya");
+                $("body main").removeClass("ju");
+                return false;
+            });
+
+            //대메뉴 클릭시 페이지 슬라이딩  //scrollTop = 스크롤바의 윗부분 / 2000 = 위치 / 1500 = 1.5초
+            $("header div.wrap ul.gnb li:nth-child(1) a").click(function(){
+                $("html,body").animate({scrollTop:800},1500);
+            });
+            $("header div.wrap ul.gnb li:nth-child(2) a").click(function(){
+                $("html,body").animate({scrollTop:1699},1500);
+            });
+            $("header div.wrap ul.gnb li:nth-child(3) a").click(function(){
+                $("html,body").animate({scrollTop:2598},1500);
+            });
+
+            $("footer a.scrolltop").click(function(){
+                $("html,body").animate({scrollTop:0},1000);
+            });
+
+            //basic의 p를 감추시오
+            $("section#basic div.wrap article ul.list li a p").hide();
+            $("section#basic div.wrap article ul.list li:nth-child(1) a p").show();
+            //basic의 h3을 클릭하면 실행
+            $("main section#basic div.wrap article ul.list li a h3").click(function(){
+                $(this).next().slideToggle();
+                // $(this).parent().parent().siblings().children().children("p").slideUp();
+                $(this).parents("li").siblings().find("p").slideUp();
+                //클릭한 요소의 li에 보더컬러 지정
+                $(this).parents("li").addClass("select");
+                //클릭한 요소의 li가 아닌 다른 형제 요소들에 클래스를 삭제
+                $(this).parents("li").siblings().removeClass("select");
+                // $(this).parents("li").toggleClass("select");
+            });
+            //basic의 a클릭시 새로고침 방지
+            $("main section#basic div.wrap article ul.list li a").click(function(){
+                return false;
+            });
+
+            //basic h3에 hover하면 실행
+            $("main section#basic div.wrap article ul.list li a h3").hover(
+                function(){
+                    $(this).parents("li").css("border","1px solid");
+                },
+                function(){
+                    $(this).parents("li").css("border","1px solid transparent");
+                }
+            );
+
+            $("section#middle div.wrap article ul.list li h3").click(function(){
+                $(this).next().slideToggle();
+                $(this).parent().siblings().find("p").slideUp();
+            });
+
+            $("section#middle div.wrap article ul.list li h3").hover(
+                function(){
+                    $(this).css({"background-color":"black","color":"white"})
+                },
+                function(){
+                    $(this).css({"background-color":"lightgray","color":"black"})
+                }
+            );
+
+        });
+    </script>
+
+    <!-- 타이틀 애니매이션 -->
+    <script type="text/javascript" src="https://daks2k3a4ib2z.cloudfront.net/5317d67d660658b254000454/js/webflow.js?2f83b8326cc4c8f7327b5dba30444a37"></script>
+
+    <!-- 슬릭 -->
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+    <script type="text/javascript" src="slick/slick.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.slic').slick();
+        });
+    </script>
+
+    <!-- 페이지 슬라이드 -->
+    <link rel="stylesheet" href="css/timelinenav.css">
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+    <script src="js/smoothscroll.js"></script>
+
+    <!-- 포트폴리오 애니메이션 -->
+    <link rel="stylesheet" href="css/portfolio.css">
+    <script src="js/portfolio.js"></script>
+    <script>
+        $(document).ready(function(){
+            let n;
+            $(".gallery .wrap a").click(function(){
+                n=$(this).parent().index()
+                $("#item0"+n+" > .row img").remove();
+                $(this).children().clone().appendTo("#item0"+n+" > .row");
+            });
+        });
+    </script>
+
+    <!-- 스킬 원형 -->
+    <link rel="stylesheet" href="css/skillcircle.css">
+    
+</head>
+<body data-spy="scroll" data-target="#navbar-example">
+    <header>
+        <div class="wrap">
+            <h1>jQuery & javascript</h1>
+            <ul class="gnb">
+                <li><a href="#basic">jQuery 기초</a></li>
+                <li><a href="#middle">jQuery 중급 예제</a></li>
+                <li><a href="#use">jQuery 활용</a></li>
+            </ul>
+            <ul class="enb">
+                <li><a href="">주간모드</a></li>
+                <li><a href="">야간모드</a></li>
+            </ul>
+        </div>
+    </header>
+    <div id="title">
+        <div class="wrap">
+            <div class="main-heading-wrapper">
+                <h2 data-ix="fade-in-heading">Website&nbsp;</h2>
+                <h2 data-ix="fade-in-heading-2">Interactions</h2>
+                <h2 class="without-code" data-ix="fade-in-heading-3">without</h2>
+                <h2 class="without-code" data-ix="fade-in-heading-4">code</h2>
+            </div>
+        </div>
+    </div>
+    <main>
+        <section id="basic">
+            <div class="wrap padding50">
+                <article class="flex flex-column flex-align-center">
+                    <h2 class="h2">jQuery 기초</h2>
+                    <p class="p">jQuery 기초 메서드</p>
+                    <ul class="list">
+                        <li>
+                            <a href="#">
+                                <h3>append()</h3>
+                                <p>선택한 요소의 마지막에 새로운 요소나 콘텐츠를 추가함.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <h3>prepend()</h3>
+                                <p>선택한 요소의 처음에 새로운 요소나 콘텐츠를 추가함.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <h3>appendTo()</h3>
+                                <p>선택한 요소를 해당 요소의 마지막에 삽입함.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <h3>prependTo()</h3>
+                                <p>선택한 요소를 해당 요소의 처음에 삽입함.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <h3>before()</h3>
+                                <p>선택한 요소의 바로 앞에 새로운 요소나 콘텐츠를 추가함.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <h3>after()</h3>
+                                <p>선택한 요소의 바로 뒤에 새로운 요소나 콘텐츠를 추가함.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <h3>insertBefore()</h3>
+                                <p>선택한 요소를 해당 요소의 앞에 삽입함.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <h3>insertAfter()</h3>
+                                <p>선택한 요소를 해당 요소의 뒤에 삽입함.</p>
+                            </a>
+                        </li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+        <section id="middle">
+            <div class="wrap padding50">
+                <article class="flex flex-column flex-align-center">
+                    <h2 class="h2">함수 필터 선택자(function Filter)</h2>
+                    <p class="p">jQuery 중급 예제 입니다.</p>
+                    <ul class="list">
+                        <li>
+                            <h3 class="h5">:eq(index)</h3>
+                            <p class="p">$("div:eq(1)")<br>일치하는 집합 내의 인덱스 n에 있는 요소를 선택</p>
+                        </li>
+                        <li>
+                            <h3 class="h5">:gt(index)</h3>
+                            <p class="p">$("div:gt(2)")<br>일치하는 세트 내의 인덱스보다 큰 인덱스에서 모든 요소를 선택</p>
+                        </li>
+                        <li>
+                            <h3 class="h5">:lang(language)</h3>
+                            <p class="p">$("div:lang(en-us)")<br>지정된 언어의 모든 요소를 선택</p>
+                        </li>
+                        <li>
+                            <h3 class="h5">:lt(index)</h3>
+                            <p class="p">$("div:lt(4)")<br>일치하는 집합 내의 인덱스보다 작은 인덱스에서 모든 요소를 선택</p>
+                        </li>
+                        <li>
+                            <h3 class="h5">:not(selector)</h3>
+                            <p class="p">$("div:not(:checked)")<br>지정된 선택자와 일치하지 않은 모든 요소를 선택</p>
+                        </li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+        <section id="use">
+            <div class="wrap padding50">
+                <article class="flex flex-column flex-align-center">
+                    <h2 class="h2">jQuery 활용</h2>
+                    <p class="p">jQuery 활용 예제 입니다.</p>
+                    <div class="slick">
+                        <h3 class="h3">slick</h3>
+                        <ul class="slic">
+                            <li class="slic1">
+                                <h4 class="h4">샘플 1</h4>
+                            </li>
+                            <li class="slic2">
+                                <h4 class="h4">샘플 2</h4>
+                            </li>
+                            <li class="slic3">
+                                <h4 class="h4">샘플 3</h4>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section id="portfolio" class="gallery">
+            <div class="row wrap">
+                <ul>
+                    <a href="#" class="close"></a>
+                    <li>
+                        <a class="image" href="#item01">
+                            <img src="https://cdn.dribbble.com/users/545884/screenshots/3981307/lorena2.png" alt="">
+                        </a>
+                    </li>
+        
+                    <li>
+                        <a class="image" href="#item02">
+                            <img src="https://cdn.dribbble.com/users/545884/screenshots/3892302/contact.png" alt="">
+                        </a>
+                    </li>
+        
+                    <li>
+                        <a class="image" href="#item03">
+                            <img src="https://cdn.dribbble.com/users/545884/screenshots/4154721/dive--001.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="image" href="#item04">
+                            <img src="https://cdn.dribbble.com/users/545884/screenshots/4356121/darko--dr.jpg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="image" href="#item05">
+                            <img src="https://cdn.dribbble.com/users/545884/screenshots/3695553/news.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="image" href="#item06">
+                            <img src="https://cdn.dribbble.com/users/545884/screenshots/4360101/liberosis_--_12.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="image" href="#item07">
+                            <img src="https://cdn.dribbble.com/users/545884/screenshots/3148799/technical-book.jpg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="image" href="#item08">
+                            <img src="https://cdn.dribbble.com/users/545884/screenshots/2883479/cover.jpg" alt="">
+                        </a>
+                    </li>
+                </ul>
+            </div> <!-- / row -->
+        
+            <!-- Item 01 -->
+            <div id="item01" class="port">
+                <div class="row">
+                    <div class="description">
+                        <h1>Item 01</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis libero erat. Integer ac purus est. Proin erat mi, pulvinar ut magna eget, consectetur auctor turpis.</p>
+                    </div>
+                </div> <!-- / row -->
+            </div> <!-- / Item 02 -->
+        
+            <!-- Item 02 -->
+            <div id="item02" class="port">
+                <div class="row">
+                    <div class="description">
+                        <h1>Item 02</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis libero erat. Integer ac purus est. Proin erat mi, pulvinar ut magna eget, consectetur auctor turpis.</p>
+                    </div>
+                </div> <!-- / row -->
+            </div> <!-- / Item 02 -->
+        
+            <!-- Item 03 -->
+            <div id="item03" class="port">
+                <div class="row">
+                    <div class="description">
+                        <h1>Item 03</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis libero erat. Integer ac purus est. Proin erat mi, pulvinar ut magna eget, consectetur auctor turpis.</p>
+                    </div>
+                </div> <!-- / row -->
+            </div> <!-- / Item 03 -->
+
+            <!-- Item 04 -->
+            <div id="item04" class="port">
+                <div class="row">
+                    <div class="description">
+                        <h1>Item 04</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis libero erat. Integer ac purus est. Proin erat mi, pulvinar ut magna eget, consectetur auctor turpis.</p>
+                    </div>
+                </div> <!-- / row -->
+            </div> <!-- / Item 04 -->
+
+            <!-- Item 05 -->
+            <div id="item05" class="port">
+                <div class="row">
+                    <div class="description">
+                        <h1>Item 05</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis libero erat. Integer ac purus est. Proin erat mi, pulvinar ut magna eget, consectetur auctor turpis.</p>
+                    </div>
+                </div> <!-- / row -->
+            </div> <!-- / Item 05 -->
+
+            <!-- Item 06 -->
+            <div id="item06" class="port">
+                <div class="row">
+                    <div class="description">
+                        <h1>Item 06</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis libero erat. Integer ac purus est. Proin erat mi, pulvinar ut magna eget, consectetur auctor turpis.</p>
+                    </div>
+                </div> <!-- / row -->
+            </div> <!-- / Item 06 -->
+
+            <!-- Item 07 -->
+            <div id="item07" class="port">
+                <div class="row">
+                    <div class="description">
+                        <h1>Item 07</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis libero erat. Integer ac purus est. Proin erat mi, pulvinar ut magna eget, consectetur auctor turpis.</p>
+                    </div>
+                </div> <!-- / row -->
+            </div> <!-- / Item 07 -->
+
+            <!-- Item 08 -->
+            <div id="item08" class="port">
+                <div class="row">
+                    <div class="description">
+                        <h1>Item 08</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis libero erat. Integer ac purus est. Proin erat mi, pulvinar ut magna eget, consectetur auctor turpis.</p>
+                    </div>
+                </div> <!-- / row -->
+            </div> <!-- / Item 08 -->
+        </section>
+        <section id="skill">
+            <div class="wrap">
+                <ul class="progress">
+                    <!--  Item  -->
+                    <li data-name="SVG Skill" data-percent="0%">
+                        <svg viewBox="-10 -10 220 220">
+                        <g fill="none" stroke-width="3" transform="translate(100,100)">
+                        <path d="M 0,-100 A 100,100 0 0,1 86.6,-50" stroke="url(#cl1)"/>
+                        <path d="M 86.6,-50 A 100,100 0 0,1 86.6,50" stroke="url(#cl2)"/>
+                        <path d="M 86.6,50 A 100,100 0 0,1 0,100" stroke="url(#cl3)"/>
+                        <path d="M 0,100 A 100,100 0 0,1 -86.6,50" stroke="url(#cl4)"/>
+                        <path d="M -86.6,50 A 100,100 0 0,1 -86.6,-50" stroke="url(#cl5)"/>
+                        <path d="M -86.6,-50 A 100,100 0 0,1 0,-100" stroke="url(#cl6)"/>
+                        </g>
+                        </svg>
+                        <svg viewBox="-10 -10 220 220">
+                        <path d="M200,100 C200,44.771525 155.228475,0 100,0 C44.771525,0 0,44.771525 0,100 C0,155.228475 44.771525,200 100,200 C155.228475,200 200,155.228475 200,100 Z" stroke-dashoffset="81"></path>
+                        </svg>
+                    </li>
+                    <!--  Item  -->
+                    <li data-name="HTML5 Skill" data-percent="20%">
+                        <svg viewBox="-10 -10 220 220">
+                        <g fill="none" stroke-width="2" transform="translate(100,100)">
+                        <path d="M 0,-100 A 100,100 0 0,1 86.6,-50" stroke="url(#cl1)"/>
+                        <path d="M 86.6,-50 A 100,100 0 0,1 86.6,50" stroke="url(#cl2)"/>
+                        <path d="M 86.6,50 A 100,100 0 0,1 0,100" stroke="url(#cl3)"/>
+                        <path d="M 0,100 A 100,100 0 0,1 -86.6,50" stroke="url(#cl4)"/>
+                        <path d="M -86.6,50 A 100,100 0 0,1 -86.6,-50" stroke="url(#cl5)"/>
+                        <path d="M -86.6,-50 A 100,100 0 0,1 0,-100" stroke="url(#cl6)"/>
+                        </g>
+                        </svg>
+                        <svg viewBox="-10 -10 220 220">
+                        <path d="M200,100 C200,44.771525 155.228475,0 100,0 C44.771525,0 0,44.771525 0,100 C0,155.228475 44.771525,200 100,200 C155.228475,200 200,155.228475 200,100 Z" stroke-dashoffset="547"></path>
+                        </svg>
+                    </li>
+                    <!--  Item  -->
+                    <li data-name="jQuery Skill" data-percent="40%">
+                        <svg viewBox="-10 -10 220 220">
+                        <g fill="none" stroke-width="12" transform="translate(100,100)">
+                        <path d="M 0,-100 A 100,100 0 0,1 86.6,-50" stroke="url(#cl1)"/>
+                        <path d="M 86.6,-50 A 100,100 0 0,1 86.6,50" stroke="url(#cl2)"/>
+                        <path d="M 86.6,50 A 100,100 0 0,1 0,100" stroke="url(#cl3)"/>
+                        <path d="M 0,100 A 100,100 0 0,1 -86.6,50" stroke="url(#cl4)"/>
+                        <path d="M -86.6,50 A 100,100 0 0,1 -86.6,-50" stroke="url(#cl5)"/>
+                        <path d="M -86.6,-50 A 100,100 0 0,1 0,-100" stroke="url(#cl6)"/>
+                        </g>
+                        </svg>
+                        <svg viewBox="-10 -10 220 220">
+                        <path d="M200,100 C200,44.771525 155.228475,0 100,0 C44.771525,0 0,44.771525 0,100 C0,155.228475 44.771525,200 100,200 C155.228475,200 200,155.228475 200,100 Z" stroke-dashoffset="81"></path>
+                        </svg>
+                    </li>
+                    <!--  Item  -->
+                    <li data-name="UI Skill" data-percent="60%">
+                        <svg viewBox="-10 -10 220 220">
+                        <g fill="none" stroke-width="9" transform="translate(100,100)">
+                        <path d="M 0,-100 A 100,100 0 0,1 86.6,-50" stroke="url(#cl1)"/>
+                        <path d="M 86.6,-50 A 100,100 0 0,1 86.6,50" stroke="url(#cl2)"/>
+                        <path d="M 86.6,50 A 100,100 0 0,1 0,100" stroke="url(#cl3)"/>
+                        <path d="M 0,100 A 100,100 0 0,1 -86.6,50" stroke="url(#cl4)"/>
+                        <path d="M -86.6,50 A 100,100 0 0,1 -86.6,-50" stroke="url(#cl5)"/>
+                        <path d="M -86.6,-50 A 100,100 0 0,1 0,-100" stroke="url(#cl6)"/>
+                        </g>
+                        </svg>
+                        <svg viewBox="-10 -10 220 220">
+                        <path d="M200,100 C200,44.771525 155.228475,0 100,0 C44.771525,0 0,44.771525 0,100 C0,155.228475 44.771525,200 100,200 C155.228475,200 200,155.228475 200,100 Z" stroke-dashoffset="610"></path>
+                        </svg>
+                    </li>
+                    <!--  Item  -->
+                    <li data-name="PHP Skill" data-percent="80%">
+                        <svg viewBox="-10 -10 220 220">
+                        <g fill="none" stroke-width="6" transform="translate(100,100)">
+                        <path d="M 0,-100 A 100,100 0 0,1 86.6,-50" stroke="url(#cl1)"/>
+                        <path d="M 86.6,-50 A 100,100 0 0,1 86.6,50" stroke="url(#cl2)"/>
+                        <path d="M 86.6,50 A 100,100 0 0,1 0,100" stroke="url(#cl3)"/>
+                        <path d="M 0,100 A 100,100 0 0,1 -86.6,50" stroke="url(#cl4)"/>
+                        <path d="M -86.6,50 A 100,100 0 0,1 -86.6,-50" stroke="url(#cl5)"/>
+                        <path d="M -86.6,-50 A 100,100 0 0,1 0,-100" stroke="url(#cl6)"/>
+                        </g>
+                        </svg>
+                        <svg viewBox="-10 -10 220 220">
+                        <path d="M200,100 C200,44.771525 155.228475,0 100,0 C44.771525,0 0,44.771525 0,100 C0,155.228475 44.771525,200 100,200 C155.228475,200 200,155.228475 200,100 Z" stroke-dashoffset="364"></path>
+                        </svg>
+                    </li>
+                    <!--  Item  -->
+                    <li data-name="CSS Skill" data-percent="100%">
+                        <svg viewBox="-10 -10 220 220">
+                        <g fill="none" stroke-width="6" transform="translate(100,100)">
+                        <path d="M 0,-100 A 100,100 0 0,1 86.6,-50" stroke="url(#cl1)"/>
+                        <path d="M 86.6,-50 A 100,100 0 0,1 86.6,50" stroke="url(#cl2)"/>
+                        <path d="M 86.6,50 A 100,100 0 0,1 0,100" stroke="url(#cl3)"/>
+                        <path d="M 0,100 A 100,100 0 0,1 -86.6,50" stroke="url(#cl4)"/>
+                        <path d="M -86.6,50 A 100,100 0 0,1 -86.6,-50" stroke="url(#cl5)"/>
+                        <path d="M -86.6,-50 A 100,100 0 0,1 0,-100" stroke="url(#cl6)"/>
+                        </g>
+                        </svg>
+                        <svg viewBox="-10 -10 220 220">
+                        <path d="M200,100 C200,44.771525 155.228475,0 100,0 C44.771525,0 0,44.771525 0,100 C0,155.228475 44.771525,200 100,200 C155.228475,200 200,155.228475 200,100 Z" stroke-dashoffset="629"></path>
+                        </svg>
+                    </li>
+                </ul>
+                <svg width="0" height="0">
+                    <defs>
+                    <linearGradient id="cl1" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1">
+                        <stop stop-color="#618099"/>
+                        <stop offset="100%" stop-color="#8e6677"/>
+                    </linearGradient>
+                    <linearGradient id="cl2" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="0" y2="1">
+                        <stop stop-color="#8e6677"/>
+                        <stop offset="100%" stop-color="#9b5e67"/>
+                    </linearGradient>
+                    <linearGradient id="cl3" gradientUnits="objectBoundingBox" x1="1" y1="0" x2="0" y2="1">
+                        <stop stop-color="#9b5e67"/>
+                        <stop offset="100%" stop-color="#9c787a"/>
+                    </linearGradient>
+                    <linearGradient id="cl4" gradientUnits="objectBoundingBox" x1="1" y1="1" x2="0" y2="0">
+                        <stop stop-color="#9c787a"/>
+                        <stop offset="100%" stop-color="#817a94"/>
+                    </linearGradient>
+                    <linearGradient id="cl5" gradientUnits="objectBoundingBox" x1="0" y1="1" x2="0" y2="0">
+                        <stop stop-color="#817a94"/>
+                        <stop offset="100%" stop-color="#498a98"/>
+                    </linearGradient>
+                    <linearGradient id="cl6" gradientUnits="objectBoundingBox" x1="0" y1="1" x2="1" y2="0">
+                        <stop stop-color="#498a98"/>
+                        <stop offset="100%" stop-color="#618099"/>
+                    </linearGradient>
+                    </defs>
+                    </svg>
+            </div>
+        </section>
+        <nav class="nav__wrapper" id="navbar-example">
+            <ul class="nav">
+              <li role="presentation">
+                <a href="#title">
+                  <span class="nav__counter">01</span>
+                  <h3 class="nav__title">Title</h3>
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#basic">
+                  <span class="nav__counter">02</span>
+                  <h3 class="nav__title">Basic</h3>
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#middle">
+                  <span class="nav__counter">03</span>
+                  <h3 class="nav__title">Middle</h3>
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#use">
+                  <span class="nav__counter">04</span>
+                  <h3 class="nav__title">Use</h3>
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#portfolio">
+                  <span class="nav__counter">05</span>
+                  <h3 class="nav__title">Portfolio</h3>
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#skill">
+                  <span class="nav__counter">06</span>
+                  <h3 class="nav__title">Skill</h3>
+                </a>
+              </li>
+            </ul>
+          </nav>
+    </main>
+    <aside>
+        <button>
+
+        </button>
+    </aside>
+    <footer>
+        <a href="#" class="scrolltop">top</a>
+    </footer>
+</body>
+</html>
